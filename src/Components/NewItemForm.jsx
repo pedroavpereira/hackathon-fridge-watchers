@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createEntry } from "../Services/entriesAPI";
 
-function NewItemForm() {
+function NewItemForm({ setFridgeContent, onCloseModal }) {
   const [itemName, setItemName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [image, setImage] = useState("");
@@ -16,9 +16,9 @@ function NewItemForm() {
 
   const [isFetching, setIsFetching] = useState(false);
 
+  /*
   useEffect(
     function () {
-      /*
       if (!image) return;
 
       async function fetchAiData() {
@@ -32,18 +32,20 @@ function NewItemForm() {
         } catch (err) {
           console.log(err);
         } finally {
-          //setIsFetching(false);
+          setIsFetching(false);
         }
       }
 
       fetchAiData();
-      */
     },
     [image]
-  );
+  );*/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!image && !itemName && !expiryDate) return;
+
     try {
       setIsFetching(true);
       const payload = {
@@ -53,6 +55,9 @@ function NewItemForm() {
       };
 
       const newEntry = createEntry(payload);
+
+      setFridgeContent((col) => [payload, ...col]);
+      onCloseModal();
     } catch (err) {
       console.log(err);
     } finally {
@@ -85,7 +90,7 @@ function NewItemForm() {
               e.preventDefault();
               setShowCamera(true);
             }}
-            className="flex items-center justify-center w-16 h-16 text-4xl text-white bg-red-500 rounded-full"
+            className="flex items-center justify-center w-16 h-16 text-4xl border-2 border-blue-800 text-blue-800 hover:text-white hover:bg-blue-800 rounded-full"
           >
             <IoIosCamera />
           </button>
@@ -127,7 +132,7 @@ function NewItemForm() {
         </div>
         <button
           disabled={isFetching}
-          className="border-2 border-red-500 px-4 py-1 rounded-md"
+          className="border-2 border-blue-800 text-blue-800 hover:text-white hover:bg-blue-800 px-4 py-2 rounded-lg"
           submit
         >
           Add to fridge

@@ -10,7 +10,10 @@ export async function createEntry(payload) {
 }
 
 export async function getEntries() {
+  console.log("inside getEntries");
   let { data, error } = await supabase.from("entries").select("*");
+  console.log(error);
+  console.log(data);
 
   return data;
 }

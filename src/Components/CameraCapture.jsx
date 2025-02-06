@@ -47,27 +47,34 @@ const CameraCapture = ({ setFormImage, setShowCamera }) => {
       <div className="flex gap-2">
         <button
           onClick={cancel}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="border-2 border-blue-800 text-blue-800 hover:text-white hover:bg-blue-800 px-4 py-2 rounded-lg"
         >
           <MdOutlineCancel />
         </button>
         {!image ? (
           <button
             onClick={capture}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="border-2 border-blue-800 text-blue-800 hover:text-white hover:bg-blue-800 px-4 py-2 rounded-lg"
           >
             Take Photo
           </button>
         ) : (
           <button
             onClick={reset}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+            className=" border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg"
           >
             Retake
           </button>
         )}
 
-        {image && <button onClick={handleSubmit}>Submit</button>}
+        {image && (
+          <button
+            className="border-2 border-blue-800 text-blue-800 hover:text-white hover:bg-blue-800 px-4 py-2 rounded-lg"
+            onClick={handleSubmit}
+          >
+            Use picture
+          </button>
+        )}
       </div>
     </div>
   );

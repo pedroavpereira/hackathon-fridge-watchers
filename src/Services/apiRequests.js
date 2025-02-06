@@ -9,9 +9,11 @@ export async function verifyInformationWithAI(payload) {
     body: JSON.stringify(payload),
   };
   try {
-    const response = await fetch(`${API_URL}/`, options);
+    const response = await fetch(`${API_URL}/image`, options);
 
     const data = await response.json();
+
+    console.log(data);
 
     return data;
   } catch (err) {
