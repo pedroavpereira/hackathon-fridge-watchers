@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import CameraCapture from "./CameraCapture";
 import { IoIosCamera } from "react-icons/io";
-import { createEntry, verifyInformationWithAI } from "../Services/apiRequests";
+import { verifyInformationWithAI } from "../Services/apiRequests";
 import LocalSpinner from "./LocalSpinner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { createEntry } from "../Services/entriesAPI";
 
 function NewItemForm() {
   const [itemName, setItemName] = useState("");
@@ -15,10 +16,9 @@ function NewItemForm() {
 
   const [isFetching, setIsFetching] = useState(false);
 
-  console.log(isFetching);
-
   useEffect(
     function () {
+      /*
       if (!image) return;
 
       async function fetchAiData() {
@@ -37,6 +37,7 @@ function NewItemForm() {
       }
 
       fetchAiData();
+      */
     },
     [image]
   );
@@ -109,7 +110,7 @@ function NewItemForm() {
             className="w-full px-4 py-1 border-2 broder-slate-700 rounded-md"
             id="product_name"
             value={itemName}
-            onChange={(e) => setItemName(e.value)}
+            onChange={(e) => setItemName(e.target.value)}
             disabled={isFetching}
           />
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchFridgeContent } from "../Services/apiRequests";
 import { TbMoodEmpty } from "react-icons/tb";
 import FridgeContentList from "./FridgeContentList";
+import { getEntries } from "../Services/entriesAPI";
 
 const mockContent = [
   {
@@ -22,7 +22,7 @@ function FridgeContent() {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const data = await fetchFridgeContent();
+        const data = await getEntries();
 
         if (data) {
           setFridgeContent(data);
